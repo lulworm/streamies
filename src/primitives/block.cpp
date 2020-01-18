@@ -13,7 +13,6 @@
 #include "utilstrencodings.h"
 #include "util.h"
 #include "hashblock.h"
-#include "main.h"
 
 uint256 CBlockHeader::GetHash() const
 {
