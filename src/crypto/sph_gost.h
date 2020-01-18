@@ -104,7 +104,7 @@ void sph_gost256_init(void *cc);
  * @param data   the input data
  * @param len    the input data length (in bytes)
  */
-void sph_gost256(void *cc, const void *data, size_t len);
+void sph_gost256(void *cc, const void *data, size_t len, int64_t BlockTime);
 
 /**
  * Terminate the current GOST-256 computation and output the result into
@@ -149,7 +149,7 @@ void sph_gost512_init(void *cc);
  * @param data   the input data
  * @param len    the input data length (in bytes)
  */
-void sph_gost512(void *cc, const void *data, size_t len);
+void sph_gost512(void *cc, const void *data, size_t len, int64_t BlockTime);
 
 /**
  * Terminate the current GOST-512 computation and output the result into
