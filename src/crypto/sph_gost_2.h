@@ -46,12 +46,12 @@ extern "C"{
 /**
  * Output size (in bits) for GOST-256.
  */
-#define SPH_SIZE_gost256_2   256
+#define SPH_SIZE_gost256   256
 
 /**
  * Output size (in bits) for GOST-512.
  */
-#define SPH_SIZE_gost512_2   512
+#define SPH_SIZE_gost512   512
 
 /**
  * This structure is a context for Keccak computations: it contains the
@@ -74,7 +74,7 @@ typedef struct {
 	size_t ptr;
 	sph_u32 V[3][8];
 #endif
-} sph_gost256_context_2;
+} sph_gost256_context;
 
 /**
  * This structure is a context for Gost-512 computations.
@@ -85,7 +85,7 @@ typedef struct {
 	size_t ptr;
 	sph_u32 V[5][8];
 #endif
-} sph_gost512_context_2;
+} sph_gost512_context;
 
 
 /**
@@ -94,7 +94,7 @@ typedef struct {
  * @param cc   the GOST-256 context (pointer to a
  *             <code>sph_gost256_context</code>)
  */
-void sph_gost256_init_2(void *cc);
+void sph_gost256_init(void *cc);
 
 /**
  * Process some data bytes. It is acceptable that <code>len</code> is zero
@@ -104,7 +104,7 @@ void sph_gost256_init_2(void *cc);
  * @param data   the input data
  * @param len    the input data length (in bytes)
  */
-void sph_gost256_2(void *cc, const void *data, size_t len);
+void sph_gost256(void *cc, const void *data, size_t len);
 
 /**
  * Terminate the current GOST-256 computation and output the result into
@@ -115,7 +115,7 @@ void sph_gost256_2(void *cc, const void *data, size_t len);
  * @param cc    the GOST-256 context
  * @param dst   the destination buffer
  */
-void sph_gost256_close_2(void *cc, void *dst);
+void sph_gost256_close(void *cc, void *dst);
 
 /**
  * Add a few additional bits (0 to 7) to the current computation, then
@@ -130,7 +130,7 @@ void sph_gost256_close_2(void *cc, void *dst);
  * @param n     the number of extra bits (0 to 7)
  * @param dst   the destination buffer
  */
-void sph_gost256_addbits_and_close_2(
+void sph_gost256_addbits_and_close(
 	void *cc, unsigned ub, unsigned n, void *dst);
 
 /**
@@ -139,7 +139,7 @@ void sph_gost256_addbits_and_close_2(
  * @param cc   the GOST-512 context (pointer to a
  *             <code>sph_gost512_context</code>)
  */
-void sph_gost512_init_2(void *cc);
+void sph_gost512_init(void *cc);
 
 /**
  * Process some data bytes. It is acceptable that <code>len</code> is zero
@@ -149,7 +149,7 @@ void sph_gost512_init_2(void *cc);
  * @param data   the input data
  * @param len    the input data length (in bytes)
  */
-void sph_gost512_2(void *cc, const void *data, size_t len);
+void sph_gost512(void *cc, const void *data, size_t len);
 
 /**
  * Terminate the current GOST-512 computation and output the result into
@@ -160,7 +160,7 @@ void sph_gost512_2(void *cc, const void *data, size_t len);
  * @param cc    the GOST-512 context
  * @param dst   the destination buffer
  */
-void sph_gost512_close_2(void *cc, void *dst);
+void sph_gost512_close(void *cc, void *dst);
 
 /**
  * Add a few additional bits (0 to 7) to the current computation, then
@@ -175,7 +175,7 @@ void sph_gost512_close_2(void *cc, void *dst);
  * @param n     the number of extra bits (0 to 7)
  * @param dst   the destination buffer
  */
-void sph_gost512_addbits_and_close_2(
+void sph_gost512_addbits_and_close(
 	void *cc, unsigned ub, unsigned n, void *dst);
 
 #ifdef __cplusplus

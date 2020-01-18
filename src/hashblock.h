@@ -20,18 +20,18 @@
 GLOBAL sph_skein512_context     z_skein;
 GLOBAL sph_cubehash512_context  z_cubehash;
 GLOBAL sph_fugue512_context     z_fugue;
-GLOBAL sph_gost512_context_2      z_gost_2;
+GLOBAL sph_gost512_context      z_gost;
 
 #define fillz() do { \
     sph_skein512_init(&z_skein); \
     sph_cubehash512_init(&z_cubehash); \
     sph_fugue512_init(&z_fugue); \
-    sph_gost512_init_2(&z_gost_2); \
+    sph_gost512_init(&z_gost); \
 } while (0) 
 
 #define ZSKEIN (memcpy(&ctx_skein, &z_skein, sizeof(z_skein)))
 #define ZFUGUE (memcpy(&ctx_fugue, &z_fugue, sizeof(z_fugue)))
-#define ZGOST (memcpy(&ctx_gost_2, &z_gost_2, sizeof(z_gost_2)))
+#define ZGOST (memcpy(&ctx_gost, &z_gost, sizeof(z_gost)))
 
 template<typename T1>
 inline uint256 SkunkHash2(const T1 pbegin, const T1 pend)
@@ -40,7 +40,7 @@ inline uint256 SkunkHash2(const T1 pbegin, const T1 pend)
     sph_skein512_context     ctx_skein;
     sph_cubehash512_context   ctx_cubehash;
     sph_fugue512_context      ctx_fugue;
-    sph_gost512_context_2      ctx_gost_2;
+    sph_gost512_context      ctx_gost;
     static unsigned char pblank[1];
 
 #ifndef QT_NO_DEBUG
@@ -62,9 +62,9 @@ inline uint256 SkunkHash2(const T1 pbegin, const T1 pend)
     sph_fugue512 (&ctx_fugue, static_cast<const void*>(&hash[1]), 64);
     sph_fugue512_close(&ctx_fugue, static_cast<void*>(&hash[2]));
 
-    sph_gost512_init_2(&ctx_gost_2);
-    sph_gost512_2 (&ctx_gost_2, static_cast<const void*>(&hash[2]), 64);
-    sph_gost512_close_2(&ctx_gost_2, static_cast<void*>(&hash[3]));
+    sph_gost512_init(&ctx_gost);
+    sph_gost512 (&ctx_gost, static_cast<const void*>(&hash[2]), 64);
+    sph_gost512_close(&ctx_gost, static_cast<void*>(&hash[3]));
 
     return hash[3].trim256();
 }
