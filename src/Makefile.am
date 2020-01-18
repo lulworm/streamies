@@ -311,7 +311,6 @@ crypto_libbitcoin_crypto_a_SOURCES = \
   crypto/cubehash.c \
   crypto/fugue.c \
   crypto/gost.c \
-  crypto/gost_2.c \
   crypto/common.h \
   crypto/sha256.h \
   crypto/sha512.h \
@@ -330,7 +329,6 @@ crypto_libbitcoin_crypto_a_SOURCES = \
   crypto/sph_cubehash.h \
   crypto/sph_fugue.h \
   crypto/sph_gost.h \
-  crypto/sph_gost_2.h \
   crypto/sph_types.h
 
 # libzerocoin library

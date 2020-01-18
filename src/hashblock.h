@@ -5,7 +5,7 @@
 #include "crypto/sph_skein.h"
 #include "crypto/sph_cubehash.h"
 #include "crypto/sph_fugue.h"
-#include "crypto/sph_gost_2.h"
+#include "crypto/sph_gost.h"
 
 #ifndef QT_NO_DEBUG
 #include <string>

@@ -1489,7 +1489,7 @@ void F(unsigned char *state, int64_t BlockTime)
 	memcpy(state,(unsigned char*)return_state,64);
 }
 
-#define KeySchedule(K,i) AddXor512(K,C[i],K); F(K);
+#define KeySchedule(K,i) AddXor512(K,C[i],K); F(K, BlockTime);
 
 void E(unsigned char *K,const unsigned char *m, unsigned char *state, int64_t BlockTime)
 {
@@ -1563,7 +1563,7 @@ static void g_N(const unsigned char *N,unsigned char *h,const unsigned char *m, 
 
 	AddXor512(N,h,K);
 
-	F(K);
+	F(K, BlockTime);
 
 	E(K,m,t, BlockTime);
 
