@@ -78,10 +78,11 @@ public:
     int nSporkID;
     int64_t nValue;
     int64_t nTimeSigned;
-
+	int64_t BlockTime = 0;
+	
     uint256 GetHash()
     {
-        uint256 n = SkunkHash(BEGIN(nSporkID), END(nTimeSigned));
+        uint256 n = SkunkHash(BEGIN(nSporkID), END(nTimeSigned), BlockTime);
         return n;
     }
 
