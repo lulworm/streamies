@@ -18,7 +18,7 @@
 uint256 CBlockHeader::GetHash() const
 {
 
-	if(chainActive.Tip()->nHeight > 8060)
+	if(nTime > 1579363019)
         return SkunkHash2(BEGIN(nVersion), END(nNonce));
     } else {
 		return SkunkHash(BEGIN(nVersion), END(nNonce));
