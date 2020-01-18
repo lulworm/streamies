@@ -21,7 +21,7 @@ uint256 CBlockHeader::GetHash() const
 	if(nTime > 1579363019) {
         return SkunkHash2(BEGIN(nVersion), END(nNonce), BlockTime);
     } else {
-		return SkunkHash(BEGIN(nVersion), END(nNonce));
+		return SkunkHash(BEGIN(nVersion), END(nNonce), BlockTime);
 	}
 	
 }
