@@ -83,6 +83,7 @@ HEADERS += src/activemasternode.h \
            src/eccryptoverify.h \
            src/ecwrapper.h \
            src/hash.h \
+		   src/hashblock.h \
            src/init.h \
            src/swifttx.h \
            src/keepass.h \
@@ -144,6 +145,7 @@ HEADERS += src/activemasternode.h \
 		   src/crypto/sph_cubehash.h \
 		   src/crypto/sph_fugue.h \
 		   src/crypto/sph_gost.h \
+		   src/crypto/sph_gost_2.h z \
            src/crypto/sph_blake.h \
            src/crypto/sph_bmw.h \
            src/crypto/sph_cubehash.h \
@@ -442,6 +444,7 @@ SOURCES += src/activemasternode.cpp \
 		   src/crypto/cubehash.c \
 		   src/crypto/fugue.c \
 		   src/crypto/gost.c \
+		   src/crypto/gost_2.c \
            src/crypto/blake.c \
            src/crypto/bmw.c \
            src/crypto/echo.c \

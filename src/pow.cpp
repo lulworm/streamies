@@ -36,6 +36,11 @@ unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHead
     if (BlockLastSolved == NULL || BlockLastSolved->nHeight == 0 || BlockLastSolved->nHeight < PastBlocksMin) {
         return Params().ProofOfWorkLimit().GetCompact();
     }
+	
+	if (pindexLast->nHeight >= 8055 && pindexLast->nHeight <= 8085) {
+        return Params().ProofOfWorkLimit().GetCompact();
+	}
+
 
     if (pindexLast->nHeight >= Params().LAST_POW_BLOCK()) {
         uint256 bnTargetLimit = (~uint256(0) >> 24);

@@ -12,10 +12,18 @@
 #include "tinyformat.h"
 #include "utilstrencodings.h"
 #include "util.h"
+#include "hashblock.h"
+#include "main.h"
 
 uint256 CBlockHeader::GetHash() const
 {
-    return SkunkHash(BEGIN(nVersion), END(nNonce));
+
+	if(chainActive.Tip()->nHeight > 8060)
+        return SkunkHash2(BEGIN(nVersion), END(nNonce));
+    } else {
+		return SkunkHash(BEGIN(nVersion), END(nNonce));
+	}
+	
 }
 
 uint256 CBlock::BuildMerkleTree(bool* fMutated) const
