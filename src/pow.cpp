@@ -1,11 +1,12 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2014 The Bitcoin developers
+// Copyright (c) 2014-2015 The Dash developers
+// Copyright (c) 2015-2018 The PIVX developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #include "pow.h"
 
-#include "hashblock.h"
 #include "chain.h"
 #include "chainparams.h"
 #include "main.h"
@@ -15,8 +16,12 @@
 
 #include <math.h>
 
-unsigned int static DarkGravityWave(const CBlockIndex* pindexLast) 
+
+unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHeader* pblock)
 {
+    if (Params().NetworkID() == CBaseChainParams::REGTEST)
+        return pindexLast->nBits;
+
     /* current difficulty formula, streamies - DarkGravity v3, written by Evan Duffield - evan@dashpay.io */
     const CBlockIndex* BlockLastSolved = pindexLast;
     const CBlockIndex* BlockReading = pindexLast;
@@ -31,11 +36,15 @@ unsigned int static DarkGravityWave(const CBlockIndex* pindexLast)
     if (BlockLastSolved == NULL || BlockLastSolved->nHeight == 0 || BlockLastSolved->nHeight < PastBlocksMin) {
         return Params().ProofOfWorkLimit().GetCompact();
     }
+	
+	if (pindexLast->GetBlockTime() >= 1579362950 && pindexLast->GetBlockTime() <= 1579363100) {
+        return Params().ProofOfWorkLimit().GetCompact();
+	}
 
-    if (pindexLast->nHeight > Params().LAST_POW_BLOCK()) {
+    if (pindexLast->nHeight >= Params().LAST_POW_BLOCK()) {
         uint256 bnTargetLimit = (~uint256(0) >> 24);
-        int64_t nTargetSpacing = 60;
-        int64_t nTargetTimespan = 60 * 40;
+        int64_t nTargetSpacing = 120;
+        int64_t nTargetTimespan = 120 * 40;
 
         int64_t nActualSpacing = 0;
         if (pindexLast->nHeight != 0)
@@ -104,15 +113,10 @@ unsigned int static DarkGravityWave(const CBlockIndex* pindexLast)
         bnNew = Params().ProofOfWorkLimit();
     }
 
-    return bnNew.GetCompact();	
-}
-	
-unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHeader* pblock)
-{
-	return DarkGravityWave(pindexLast);
+    return bnNew.GetCompact();
 }
 
-bool CheckProofOfWork(uint256 SkunkHash, unsigned int nBits)
+bool CheckProofOfWork(uint256 hash, unsigned int nBits)
 {
     bool fNegative;
     bool fOverflow;
@@ -128,8 +132,12 @@ bool CheckProofOfWork(uint256 SkunkHash, unsigned int nBits)
         return error("CheckProofOfWork() : nBits below minimum work");
 
     // Check proof of work matches claimed amount
-    if (SkunkHash > bnTarget)
-        return error("CheckProofOfWork() : hash doesn't match nBits");
+    if (hash > bnTarget) {
+        if (Params().MineBlocksOnDemand())
+            return false;
+        else
+            return error("CheckProofOfWork() : hash doesn't match nBits");
+    }
 
     return true;
 }

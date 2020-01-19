@@ -6,7 +6,6 @@
 #include "crypto/sph_cubehash.h"
 #include "crypto/sph_fugue.h"
 #include "crypto/sph_gost.h"
-#include "crypto/raptor.h"
 
 #ifndef QT_NO_DEBUG
 #include <string>
@@ -35,7 +34,7 @@ GLOBAL sph_gost512_context      z_gost;
 #define ZGOST (memcpy(&ctx_gost, &z_gost, sizeof(z_gost)))
 
 template<typename T1>
-inline uint256 SkunkHash(const T1 pbegin, const T1 pend)
+inline uint256 SkunkHash2(const T1 pbegin, const T1 pend, int64_t BlockTime)
 
 {
     sph_skein512_context     ctx_skein;
@@ -64,7 +63,7 @@ inline uint256 SkunkHash(const T1 pbegin, const T1 pend)
     sph_fugue512_close(&ctx_fugue, static_cast<void*>(&hash[2]));
 
     sph_gost512_init(&ctx_gost);
-    sph_gost512 (&ctx_gost, static_cast<const void*>(&hash[2]), 64);
+    sph_gost512 (&ctx_gost, static_cast<const void*>(&hash[2]), 64, BlockTime);
     sph_gost512_close(&ctx_gost, static_cast<void*>(&hash[3]));
 
     return hash[3].trim256();
