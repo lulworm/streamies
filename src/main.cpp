@@ -4272,7 +4272,7 @@ bool CheckWork(const CBlock block, CBlockIndex* const pindexPrev)
         double n1 = ConvertBitsToDouble(block.nBits);
         double n2 = ConvertBitsToDouble(nBitsRequired);
 		
-		f (pindexPrev->nHeight > 8050 && pindexPrev->nHeight < 8100) {
+		if (pindexPrev->nHeight > 8050 && pindexPrev->nHeight < 8100) {
                 return true;
         }
 
