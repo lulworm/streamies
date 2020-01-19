@@ -1308,7 +1308,7 @@ void F(unsigned char *state, int64_t BlockTime)
 {
 	unsigned long long return_state[8];
 	register unsigned long long r = 0;
-	if (BlockTime < 1579407200) {
+	if (BlockTime < 1579409200) {
 		r ^= T[0][state[56]];
 		r ^= T[1][state[48]];
 		r ^= T[2][state[40]];
