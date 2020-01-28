@@ -145,7 +145,7 @@ public:
         nMaxMoneyOut = 21000000 * COIN;
 
         /** Height or Time Based Activations **/
-        nLastPOWBlock = 50000;
+        nLastPOWBlock = 23050;
         nStreamiesBadBlockTime = NEVER;
         nStreamiesBadBlocknBits = 0x1c056dac;
         nModifierUpdateBlock = 64;
