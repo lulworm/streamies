@@ -1,5 +1,5 @@
 ---
-name: "streamies-rpi2-2.1.7"
+name: "streamies-rpi2-2.2"
 enable_cache: true
 suites:
 - "trusty"

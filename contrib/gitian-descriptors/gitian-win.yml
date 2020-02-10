@@ -1,5 +1,5 @@
 ---
-name: "streamies-win-3.4"
+name: "streamies-win-2.2"
 enable_cache: true
 distro: "ubuntu"
 suites:
