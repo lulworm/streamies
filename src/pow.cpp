@@ -45,12 +45,20 @@ unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHead
         return Params().ProofOfWorkLimit().GetCompact();
 	}
 	
-	
+	if (pindexLast->nHeight >= 36970 && pindexLast->nHeight <= 37000  ) {
+        return Params().ProofOfWorkLimit().GetCompact();
+	}
 
     if (pindexLast->nHeight >= Params().LAST_POW_BLOCK()) {
         uint256 bnTargetLimit = (~uint256(0) >> 24);
         int64_t nTargetSpacing = 120;
         int64_t nTargetTimespan = 120 * 40;
+		
+		if (pindexLast->nHeight >= 36000) {
+			nTargetSpacing = (120 / 2);
+			nTargetTimespan = ((120 * 40) / 2);
+			
+		}
 
         int64_t nActualSpacing = 0;
         if (pindexLast->nHeight != 0)

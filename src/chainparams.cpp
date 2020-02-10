@@ -58,7 +58,10 @@ static Checkpoints::MapCheckpoints mapCheckpoints =
 	(2, uint256("0x00000110b7f8487724d24b2e561d8004a0a10f3bc98e9950084a87b6095f6119"))
 	(3, uint256("0x0000060239993d6c65c77e62a0105cc8907697185d513f1ffb539dad37038290"))
 	(4, uint256("0x000006a74414e3b0c5c142f26bd96314eb9706697c5c638ec3141f4aa8ba27b0"))
-	(5, uint256("0x000009d75d0d40280c42aefb48efd189a7241115032bbe4cfd0d30bcf329b28c"));
+	(5, uint256("0x000009d75d0d40280c42aefb48efd189a7241115032bbe4cfd0d30bcf329b28c"))
+	(20000, uint256("0x000000000003420d6cec16ebff4383a5935874dd6ed7a023f880a7ec48f20d61"))
+	(25000, uint256("0x6c8e72949cc514dcdfbfc41fc6a683f75ea7b66dc811d2ac16f82a93bdedb3ed"))
+	(30000, uint256("0x0d1ba2d913f0c0bb8013d7cf653808e48c2b1d1ce72fbbf0eadb544d5cfc9c00"));
 
 static const Checkpoints::CCheckpointData data = {
     &mapCheckpoints,
@@ -188,9 +191,10 @@ public:
         hashGenesisBlock = genesis.GetHash();
         assert(hashGenesisBlock == uint256("0x0000004ea54a53ee922c4827329e5e56c25e9ae4754ead95ca05f6a0740d652c"));
         assert(genesis.hashMerkleRoot == uint256("0xd2c9ae336c7e2a29a3ff1a4380866a9788e869753bf5c2ab70266cc249a86933"));
-
-        vSeeds.push_back(CDNSSeedData("172.105.62.134", "172.105.62.134"));
+		
+        vSeeds.push_back(CDNSSeedData("139.162.194.226", "139.162.194.226"));
         vSeeds.push_back(CDNSSeedData("172.86.75.178", "172.86.75.178"));
+		vSeeds.push_back(CDNSSeedData("172.86.75.53", "172.86.75.53"));
 		vSeeds.push_back(CDNSSeedData("172.86.75.16", "172.86.75.16"));
 		vSeeds.push_back(CDNSSeedData("172.86.75.176", "172.86.75.176"));
 
